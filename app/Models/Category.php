@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
 
 class Category extends Model
@@ -15,7 +16,7 @@ class Category extends Model
      * @var array
      */
     protected $fillable = [
-      'name', 'slug', 'description', 'parent_id', 'featured', 'manu', 'image'
+      'name', 'slug', 'description', 'parent_id', 'featured', 'menu', 'image'
     ];
 
     /**
@@ -33,11 +34,11 @@ class Category extends Model
      public function setNameAttribute($value)
      {
        $this->attributes['name']  = $value;
-       $this->attributes['slug']  = str_slug($value);
+       $this->attributes['slug']  = Str::slug($value);
      }
 
      /**
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
      public function parent()
      {
@@ -45,7 +46,7 @@ class Category extends Model
      }
 
      /**
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
      public function children()
      {
