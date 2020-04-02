@@ -16,7 +16,7 @@ class AttributeValueController extends Controller
       $this->attributeRepository  = $attributeRepository;
     }
 
-    public function getValues(Request $rquest)
+    public function getValues(Request $request)
     {
       $attributeId  = $request->input('id');
       $attribute  = $this->attributeRepository->findAttributeById($attributeId);
@@ -42,15 +42,15 @@ class AttributeValueController extends Controller
       $attributeValue->attribute_id = $request->input('id');
       $attributeValue->value  = $request->input('value');
       $attributeValue->price  = $request->input('price');
-      $atrributeValue->save();
+      $attributeValue->save();
 
-      return  response()->json($atrributeValue);
+      return  response()->json($attributeValue);
     }
 
     public function deleteValues(Request $request)
     {
-      $atrributeValue = AtrributeValue::findOrFail($request->input('id'));
-      $atrributeValue->delete();
+      $attributeValue = AttributeValue::findOrFail($request->input('id'));
+      $attributeValue->delete();
 
       return response()->json(['status' =>  'success',  'message' =>  'Attribute value deleted successfully!']);
     }
